@@ -1,0 +1,13 @@
+{
+  "name": "unocss-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "postcss": "8.4.29",
+    "unocss": "^0.55.3"
+  }
+}
