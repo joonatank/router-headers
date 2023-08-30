@@ -1,0 +1,42 @@
+# TODO
+
+TODO: add a frontend routes and reporting
+- use regular fetch for the frontend part with a button to trigger it
+- routes should be simple passthrough / redirect type
+  e.g.
+  - frontend/api/backend/ping-with-cookies
+  - frontend/api/backend/ping-with-header
+  - frontend/api/backend/redirect-with-cookies
+  - frontend/api/backend/redirect-with-header
+
+- create a docker configuration to run the backend and the frontend in the same network
+- separate configuration of the docker to run in different hosts
+
+- separate docker network configurations
+  # same network
+  docker-internal-net/api
+  docker-internal-net/ui
+
+  # separate subnets
+  api.docker-internal-net
+  ui.docker-internal-net
+
+  # separate networks
+  api-docker-internal-net
+  ui-docker-internal-net
+
+- check the cookies and auth headers that are transmitted when we
+  - redirect from the ui server
+  - fetch from the ui server
+  - manual modifications in fetch (copying headers)
+  - automatic using credentials: include option for both
+
+## Later
+
+Add test set that send the requests through the frontend api (similar to the UI)
+- run it all inside separate docker containers (2 -6)
+- check that the resoponses are correct
+- document how headers / cookies work between the different configurations
+  - also how can we remove cookies easiest?
+  - how can we keep auth header easiest?
+  - how to preserve cookies easiest?
