@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "rome check ."
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/node": "20.5.7",
@@ -19,9 +19,11 @@
     "tsconfig": "workspace:*",
     "typescript": "5.2.2",
     "unocss": "^0.55.3",
-    "unocss-config": "workspace:*"
+    "unocss-config": "workspace:*",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
-    "rome": "^12.1.3"
+    "eslint": "^8.48.0",
+    "eslint-config-next": "13.4.19"
   }
 }

@@ -7,7 +7,8 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "start": "turbo start",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "format": "turbo format"
   },
   "dependencies": {
     "turbo": "^1.10.13"

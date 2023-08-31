@@ -40,3 +40,6 @@ Add test set that send the requests through the frontend api (similar to the UI)
   - also how can we remove cookies easiest?
   - how can we keep auth header easiest?
   - how to preserve cookies easiest?
+
+Add Github actions to run the tests on push
+- use docker actions with layer cache for them
