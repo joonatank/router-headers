@@ -1,0 +1,24 @@
+version: "3"
+services:
+  backend:
+    restart: on-failure
+    build:
+      context: .
+      target: runner-backend
+      args:
+        APP: backend 
+    hostname: backend
+    ports:
+      - '4010:4000'
+  frontend:
+    restart: on-failure
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:4000
+    build:
+      context: .
+      target: runner-frontend
+      args:
+        APP: frontend
+    hostname: frontend
+    ports:
+      - '3010:3000'

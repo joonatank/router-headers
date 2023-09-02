@@ -1,14 +1,13 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 
-console.log('initialise roots')
-
 export default async function (fastify: FastifyInstance) {
   fastify.get('/', async function (_request: FastifyRequest, _reply: FastifyReply) {
     return { root: true }
   })
-  fastify.get('/ping', async function (_request: FastifyRequest, _reply: FastifyReply) {
+  fastify.get('/ping', async function (request: FastifyRequest, _reply: FastifyReply) {
     return {
       msg: 'pong',
+      headers: request.headers,
     }
   })
   // TODO POST versions also
@@ -16,10 +15,12 @@ export default async function (fastify: FastifyInstance) {
     // TODO check auth header using Bearer strategy with bcrypt (static secret)
     // or is it Token strategy with JWT?
 
+    const authorized = request.headers.authorization != null
     const res = {
+      msg: authorized ? 'Authorized with headers' : 'Headers Unauthorized',
       path: '/auth/header',
       headers: request.headers,
-      authorized: request.headers.authorization != null,
+      authorized,
     }
     if (request.headers.authorization == null) {
       return reply.status(401).send(res)
@@ -32,14 +33,15 @@ export default async function (fastify: FastifyInstance) {
     // or is it Token strategy with JWT?
 
     // @ts-ignore
-    const auth: string | undefined = request.headers?.cookies ? String(request.headers?.cookies['custom-auth']) : undefined
+    const authorized: string | undefined = request.headers?.cookies ? String(request.headers?.cookies['custom-auth']) : undefined
     const res = {
+      msg: authorized ? 'Authorized with cookie' : 'Cookie Unauthorized',
       path: '/auth/cookie',
       cookies: request.headers.cookie,
       headers: request.headers,
-      authorized: auth != null,
+      authorized: authorized != null,
     }
-    if (auth == null) {
+    if (authorized == null) {
       return reply.status(401).send(res)
     }
 

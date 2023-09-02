@@ -31,6 +31,11 @@ TODO: add a frontend routes and reporting
   - manual modifications in fetch (copying headers)
   - automatic using credentials: include option for both
 
+TODO: wrap fetches in catch blocks so that the frontend doesn't crash when backend is down
+
+TODO: add a testing set (using playwright full e2e tests)
+- Run the containers in Github, run the playwright against them
+
 ## Later
 
 Add test set that send the requests through the frontend api (similar to the UI)
