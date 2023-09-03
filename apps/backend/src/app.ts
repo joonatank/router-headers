@@ -3,10 +3,7 @@ import cors from '@fastify/cors'
 
 import routes from './routes'
 
-console.log('initialise app')
-
 function build(opts = {}): FastifyInstance {
-  console.log('build fastify')
   const fastify = Fastify({
     ...opts,
   })
@@ -17,7 +14,6 @@ function build(opts = {}): FastifyInstance {
 
   void fastify.register(routes, { prefix: '/' })
 
-  console.log('routes registered')
   return fastify
 }
 
