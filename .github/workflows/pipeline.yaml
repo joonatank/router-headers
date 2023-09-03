@@ -1,11 +1,16 @@
 name: 'Pipeline'
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
   push:
     branches:
       - development
     tags:
       - 'v*'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   changed-packages:
