@@ -23,8 +23,8 @@ export default async function Home() {
   /// server with fetch.
   return (
     <main className="flex min-h-screen flex-col items-center gap-8 p-24">
-      <h1 className='text-3xl font-semibold'>Server responses</h1>
-      <h2 className='text-center text-2xl font-bold'>Server response</h2>
+      <h1 className='text-3xl font-semibold'>Communicate with backend</h1>
+      <h2 className='text-center text-2xl font-bold'>SSR response</h2>
       <div className='flex gap-4'>
         <ResponseCard response={ping} />
         <ResponseCard response={authHeader} />
