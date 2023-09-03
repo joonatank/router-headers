@@ -1,0 +1,12 @@
+runs:
+  using: "composite"
+  steps:
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: Set Node.js
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: 18.x
+        cache: pnpm
+    - uses: dtinth/setup-github-actions-caching-for-turbo@v1

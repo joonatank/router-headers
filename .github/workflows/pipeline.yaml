@@ -1,0 +1,60 @@
+name: 'Pipeline'
+on:
+  pull_request:
+  push:
+    branches:
+      - development
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# TODO split the backend / frontend workflows so we can target them
+# using v*-api v*-ui
+jobs:
+  changed-packages:
+    name: Determine which apps changed
+    uses: ./.github/workflows/changed-packages.yaml
+
+  lint-ui:
+    runs-on: ubuntu-latest
+    needs: [changed-packages]
+    if: needs.changed-packages.outputs.ui_changed == 'true'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint --filter frontend...
+
+  lint-api:
+    runs-on: ubuntu-latest
+    needs: [changed-packages]
+    if: needs.changed-packages.outputs.api_changed == 'true'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint --filter backend...
+
+  build-ui:
+    runs-on: ubuntu-latest
+    needs: [changed-packages]
+    if: needs.changed-packages.outputs.ui_changed == 'true'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build --filter frontend...
+
+  build-backend:
+    runs-on: ubuntu-latest
+    needs: [changed-packages]
+    if: needs.changed-packages.outputs.api_changed == 'true'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build --filter backend...
