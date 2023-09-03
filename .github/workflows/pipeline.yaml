@@ -1,0 +1,27 @@
+name: 'Pipeline'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - development
+    tags:
+      - 'v*'
+
+jobs:
+  build: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Set Node.js
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 18.x
+          cache: pnpm
+      - run: |
+          pnpm install
+      - uses: dtinth/setup-github-actions-caching-for-turbo@v1
+      - run: |
+          pnpm run build
