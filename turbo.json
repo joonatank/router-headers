@@ -1,5 +1,8 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NEXT_PUBLIC_API_URL"
+  ],
   "pipeline": {
     "build": {
       // A package's `build` script depends on that package's
