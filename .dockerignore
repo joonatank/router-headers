@@ -43,3 +43,6 @@
 **/TODO*
 
 **/Dockerfile*
+
+# no go project here, use a different Dockerfile and ignore for it
+go-backend

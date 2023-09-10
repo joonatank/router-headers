@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package headers;
+
+message Note {
+  string id = 1;
+  string name = 2;
+  string data = 3;
+}
+
+service MyService {
+  rpc SendMessage (Note) returns (Note);
+}
